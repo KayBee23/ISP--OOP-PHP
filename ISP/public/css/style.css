@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+body {
+  height: 100vh;
+}
+
+.fa-wifi {
+  color: white;
+}
+.plan-title {
+  border-bottom: 1px solid white;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
