@@ -49,4 +49,40 @@ class Pages extends Controller{
     
     
   }
+
+  public function faqs(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data = [
+        "email"=> trim($_POST['email']),
+        "message"=>$_POST['message'],
+        "email_error"=>"",
+        "message_error"=>""
+      ];
+
+      if(empty($data['email'])){
+        $data['email_error'] = 'Please enter your email!';
+      }
+
+      if(empty($data['message'])){
+        $data['message_error'] = 'Please enter your question!';
+      }
+
+      if(empty($data['email_error']) && empty($data['message_error'])){
+        $this->userModel->sendMessage($data['email'], $data['message']);
+        flash('message_success', 'Thank you for your question! We will reply to the given email address.');
+      }
+
+      $this->view('pages/faqs',$data);
+    }else{
+      $data = [
+        "email"=>"",
+        "message"=>"",
+        "email_error"=>"",
+        "message_error"=>"",
+      ];
+      $this->view('pages/faqs',$data);
+    }
+    
+  }
 }

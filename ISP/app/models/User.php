@@ -36,6 +36,7 @@ public function login($email, $password){
   }
 }
 
+
   public function findUserByEmail($email){
     $this->db->query("SELECT * FROM users WHERE email = :email");
     $this->db->bind(':email', $email);
@@ -63,5 +64,17 @@ public function login($email, $password){
     $this->db->bind(':email', $email);
     $this->db->execute();
   }
+
+public function sendMessage($email,$message){
+$this->db->query('INSERT INTO messages (email,message) VALUES (:email, :message)');
+$this->db->bind(':email', $email);
+$this->db->bind(':message', $message);
+
+  if($this->db->execute()){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 }

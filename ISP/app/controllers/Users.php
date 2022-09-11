@@ -45,10 +45,9 @@ public function register(){
       if(!$uppercase || !$lowercase || !$number || $data['password'] < 8){
         $data['password_error'] = "Please enter a password that  contains uppercase letter, lowercase letter, number and it's 8 characters long.";
       }
-      $this->view('users/register', $data);
-
     }
-
+    $this->view('users/register', $data);
+    
     if($data['password'] !== $data['confirm_password']){
       $data['confirm_password_error'] = "Passwords doesn't match!";
     }
